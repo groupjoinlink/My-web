@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join WhatsApp Group - Details</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #075e54;
+      color: white;
+      text-align: center;
+      padding: 18px 15px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .container {
+      max-width: 450px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .category-dp {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background-color: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      margin: 0 auto 15px auto;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    .group-title {
+      font-size: 22px;
+      color: #1c1e21;
+      font-weight: bold;
+      margin-bottom: 8px;
+      word-break: break-word;
+    }
+    .country-name {
+      color: #65676b;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+    .join-btn {
+      display: block;
+      width: 100%;
+      background-color: #25d366;
+      color: white;
+      padding: 14px 0;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 25px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      margin-bottom: 12px;
+      transition: background-color 0.3s;
+    }
+    .join-btn:disabled {
+      background-color: #a8e6cf;
+      cursor: not-allowed;
+    }
+    .back-btn {
+      display: block;
+      width: 100%;
+      background-color: #eceff1;
+      color: #555;
+      padding: 12px 0;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 25px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    Whats Group Join Links
+  </div>
+
+  <div class="container" id="detailsContainer">
+    <div class="group-title">Loading Group Details...</div>
+  </div>
+
+  <!-- Firebase SDK Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <script>
+    // Category Icons
+    const categoryDPs = {
+      "Entertainment": "🎬",
+      "Islamic": "🕌",
+      "Education": "📚",
+      "Tech & Mobile": "💻",
+      "Technology": "💻",
+      "Sports": "⚽",
+      "Movies": "🎥",
+      "Gaming": "🎮",
+      "Trading": "📈",
+      "Online Earning": "💰",
+      "Jobs": "💼",
+      "Videos": "📹",
+      "General": "👥"
+    };
+
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA3IddMLRa2hilO7aoCWFi1T4jzUHjAK48",
+      authDomain: "whatsapp-directory-fa7b9.firebaseapp.com",
+      databaseURL: "https://whatsapp-directory-fa7b9-default-rtdb.firebaseio.com",
+      projectId: "whatsapp-directory-fa7b9",
+      storageBucket: "whatsapp-directory-fa7b9.firebasestorage.app",
+      messagingSenderId: "215715225006",
+      appId: "1:215715225006:web:65dc7f7057e19f1105fc3f"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.database();
+
+    // Get Group ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = urlParams.get('id');
+
+    const container = document.getElementById('detailsContainer');
+
+    if (groupId) {
+      db.ref('groups/' + groupId).once('value').then((snapshot) => {
+        if (snapshot.exists()) {
+          renderGroupDetails(snapshot.val());
+        } else {
+          container.innerHTML = '<h2>Group Not Found!</h2><br><a href="index.html" class="back-btn">⬅ Back to Home</a>';
+        }
+      }).catch((error) => {
+        container.innerHTML = '<h2>Error loading group details.</h2><br><a href="index.html" class="back-btn">⬅ Back to Home</a>';
+      });
+    } else {
+      container.innerHTML = '<h2>No Group Selected!</h2><br><a href="index.html" class="back-btn">⬅ Back to Home</a>';
+    }
+
+    // Helper to prevent HTML Injection
+    function escapeHTML(str) {
+      if (!str) return '';
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    // Function to render layout
+    function renderGroupDetails(group) {
+      const cat = group.category || 'General';
+      const dpIcon = categoryDPs[cat] || '👥';
+      const country = group.country || 'Global';
+
+      container.innerHTML = `
+        <div class="category-dp">${dpIcon}</div>
+        <div class="group-title">${escapeHTML(group.name)}</div>
+        <div class="country-name">Country: ${escapeHTML(country)}</div>
+        <button id="joinBtn" class="join-btn" disabled>Please wait 5s...</button>
+        <a href="index.html" class="back-btn">⬅ Back to Home</a>
+      `;
+
+      let timeLeft = 5;
+      const joinBtn = document.getElementById('joinBtn');
+
+      const countdown = setInterval(() => {
+        timeLeft--;
+        if (timeLeft > 0) {
+          joinBtn.innerText = `Please wait ${timeLeft}s...`;
+        } else {
+          clearInterval(countdown);
+          joinBtn.disabled = false;
+          joinBtn.innerText = 'Join Group Now';
+          joinBtn.onclick = () => {
+            window.open(group.link || '#', '_blank');
+          };
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

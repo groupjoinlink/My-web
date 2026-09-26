@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
+    
+    <!-- SEO META TAGS -->
+    <meta name="description" content="Find and join active WhatsApp group links for Movies, Entertainment, Tech, Jobs, Online Earning, Trading, and Islamic content. Submit your WhatsApp group for free!">
+    <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Indian WhatsApp groups, Pakistan WhatsApp groups, WhatsApp group links 2026, online earning WhatsApp groups">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Whats group join links">
+
+    <!-- OPEN GRAPH META TAGS -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/">
+    <meta property="og:title" content="Whats Group Join Links - Active WhatsApp Groups">
+    <meta property="og:description" content="Join 1000+ active WhatsApp groups in categories like Movies, Gaming, Tech, Online Earning & Jobs.">
+
+    <!-- FIREBASE SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f0f2f5; color: #1c1e21; padding-bottom: 30px; }
+
+        .top-green-section { 
+            background: #075e54; 
+            color: white; 
+            padding: 22px 15px 25px; 
+            text-align: center; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
+        }
+        .top-green-section h1 { 
+            font-size: 22px; 
+            font-weight: 700; 
+            margin-bottom: 6px; 
+            cursor: pointer; 
+            user-select: none;
+        }
+        .top-green-section h2 { 
+            font-size: 15px; 
+            font-weight: 400; 
+            opacity: 0.9; 
+            margin-bottom: 18px; 
+        }
+
+        .hero-btns { display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; gap: 12px; }
+        .btn-banner { flex: 1; padding: 12px 8px; border-radius: 6px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; font-size: 13px; text-align: center; }
+        .btn-left { background-color: #25d366; color: white; }
+        .btn-right { background-color: #ffffff; color: #075e54; }
+
+        .container { max-width: 700px; margin: 20px auto 0; padding: 0 12px; }
+        
+        .category-sec { background: white; border-radius: 10px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .category-header { border-bottom: 2px solid #25d366; padding-bottom: 8px; margin-bottom: 12px; }
+        .category-title { font-size: 17px; color: #075e54; font-weight: bold; }
+
+        .group-list { display: flex; flex-direction: column; gap: 10px; }
+        .group-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: #fafafa; 
+            padding: 12px 14px; 
+            border-radius: 8px; 
+            border: 1px solid #e2e8f0; 
+        }
+        .group-name { font-size: 15px; font-weight: 600; color: #2d3748; word-break: break-word; flex: 1; padding-right: 10px; }
+        
+        .group-actions { display: flex; align-items: center; gap: 10px; }
+        .btn-click-join { background: #25d366; color: white; text-decoration: none; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; white-space: nowrap; }
+        .btn-report-mini { background: none; border: none; color: #e53e3e; font-size: 12px; cursor: pointer; font-weight: 600; text-decoration: underline; }
+
+        /* FULL PAGE SKELETON ANIMATION */
+        .skeleton-sec {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .skeleton-head {
+            height: 24px;
+            width: 40%;
+            background: #e0e0e0;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .skeleton-box { 
+            height: 48px; 
+            width: 100%;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%); 
+            background-size: 200% 100%; 
+            animation: loading 1.2s infinite; 
+            border-radius: 8px; 
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .empty-msg { color: #4a5568; font-size: 14px; text-align: center; padding: 25px 0; font-weight: 500; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
+        .modal-content { background: white; padding: 22px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
+        .modal-content h3 { margin-bottom: 16px; color: #075e54; font-size: 20px; text-align: center; }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #4a5568; }
+        .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 14px; }
+        .btn-close { background: #e53e3e; color: white; border: none; padding: 9px; border-radius: 6px; cursor: pointer; margin-top: 8px; width: 100%; font-weight: bold; }
+
+        .admin-dashboard { width: 100%; max-width: 800px; }
+        .admin-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+        .tab-btn { padding: 8px 14px; background: #e2e8f0; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; color: #4a5568; }
+        .tab-btn.active { background: #075e54; color: white; }
+        .admin-list { display: flex; flex-direction: column; gap: 10px; }
+        .admin-item { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; }
+        .admin-btn-row { display: flex; gap: 8px; margin-top: 8px; }
+        .btn-approve { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+        .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <!-- GREEN TOP SECTION -->
+    <div class="top-green-section">
+        <h1 id="siteTitle">Whats Group Join Links</h1>
+        <h2>Active Whatsapp group</h2>
+        
+        <div class="hero-btns">
+            <a href="https://whatsapp.com/channel/0029Vb8rlsx7T8bfdsy24Z17" target="_blank" class="btn-banner btn-left">Join Our Community</a>
+            <button class="btn-banner btn-right" onclick="openModal('submitModal')">Submit Group</button>
+        </div>
+    </div>
+
+    <!-- MAIN CATEGORIES & GROUPS -->
+    <div class="container" id="categoriesContainer">
+        <!-- FULL SCREEN SKELETON PLACEHOLDER -->
+        <div class="skeleton-sec">
+            <div class="skeleton-head"></div>
+            <div class="skeleton-box"></div>
+            <div class="skeleton-box"></div>
+            <div class="skeleton-box"></div>
+        </div>
+        <div class="skeleton-sec">
+            <div class="skeleton-head"></div>
+            <div class="skeleton-box"></div>
+            <div class="skeleton-box"></div>
+            <div class="skeleton-box"></div>
+        </div>
+        <div class="skeleton-sec">
+            <div class="skeleton-head"></div>
+            <div class="skeleton-box"></div>
+            <div class="skeleton-box"></div>
+        </div>
+    </div>
+
+    <!-- SUBMIT GROUP MODAL -->
+    <div id="submitModal" class="modal">
+        <div class="modal-content">
+            <h3>Submit New Group</h3>
+            <div class="form-group">
+                <label>Group Name</label>
+                <input type="text" id="subName" placeholder="Enter Group Name">
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="subCategory"></select>
+            </div>
+            <div class="form-group">
+                <label>Select Country</label>
+                <select id="subCountry"></select>
+            </div>
+            <div class="form-group">
+                <label>Group Tags</label>
+                <input type="text" id="subTags" placeholder="e.g. Crypto, Earning">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Group Link</label>
+                <input type="url" id="subLink" placeholder="https://chat.whatsapp.com/...">
+            </div>
+            <button class="btn-banner btn-left" style="width:100%" onclick="submitGroup()">Submit Group</button>
+            <button class="btn-close" onclick="closeModal('submitModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- REPORT MODAL -->
+    <div id="reportModal" class="modal">
+        <div class="modal-content">
+            <h3>Report Group</h3>
+            <input type="hidden" id="reportGroupId">
+            <textarea id="reportReason" rows="3" placeholder="Reason for report..."></textarea>
+            <button class="btn-banner btn-left" style="width:100%; margin-top:8px;" onclick="sendReport()">Submit Report</button>
+            <button class="btn-close" onclick="closeModal('reportModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- SECRET ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content">
+            <h3>Admin Login</h3>
+            <input type="password" id="adminPass" placeholder="Enter Admin Password">
+            <button class="btn-banner btn-left" style="width:100%; margin-top:10px;" onclick="checkAdminLogin()">Login Dashboard</button>
+            <button class="btn-close" onclick="closeModal('adminLoginModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD MODAL -->
+    <div id="adminDashboardModal" class="modal">
+        <div class="modal-content admin-dashboard">
+            <h3>Manage Groups</h3>
+            <div class="admin-tabs">
+                <button class="tab-btn active" id="tab-pending" onclick="switchAdminTab('pending')">Pending Groups</button>
+                <button class="tab-btn" id="tab-approved" onclick="switchAdminTab('approved')">Approved Groups</button>
+                <button class="tab-btn" id="tab-reports" onclick="switchAdminTab('reports')">Reports</button>
+            </div>
+            <div class="admin-list" id="adminListContainer"></div>
+            <button class="btn-close" onclick="closeModal('adminDashboardModal')">Exit Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        const categories = ["Entertainment", "Islamic", "Videos", "Sports", "Movies", "Gaming", "Trading", "Tech & Mobile", "Online Earning", "Jobs"];
+        
+        const countries = [
+            "India", "Pakistan", "Nigeria", "Indonesia", "Brazil", 
+            "Bangladesh", "Egypt", "Saudi Arabia", "UAE (Dubai)", "Kenya", 
+            "Ghana", "South Africa", "Nepal", "Malaysia", "Philippines", 
+            "Iraq", "Algeria", "Turkey", "Morocco", "Qatar"
+        ];
+
+        // FIREBASE CONFIGURATION
+        const firebaseConfig = {
+          apiKey: "AIzaSyA3IddMLRa2hilO7aoCWFi1T4jzUHjAK48",
+          authDomain: "whatsapp-directory-fa7b9.firebaseapp.com",
+          databaseURL: "https://whatsapp-directory-fa7b9-default-rtdb.firebaseio.com",
+          projectId: "whatsapp-directory-fa7b9",
+          storageBucket: "whatsapp-directory-fa7b9.firebasestorage.app",
+          messagingSenderId: "215715225006",
+          appId: "1:215715225006:web:65dc7f7057e19f1105fc3f"
+        };
+        
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.database();
+        let allGroups = [];
+        let allReports = [];
+        let currentTab = 'pending';
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function populateDropdowns() {
+            const catSelect = document.getElementById('subCategory');
+            const countrySelect = document.getElementById('subCountry');
+            if (catSelect) catSelect.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            if (countrySelect) countrySelect.innerHTML = countries.map(cnt => `<option value="${cnt}">${cnt}</option>`).join('');
+        }
+
+        // Secret Admin Panel Opener (4 Quick Taps on Title)
+        let tapCount = 0, tapTimer = null;
+        document.getElementById('siteTitle').addEventListener('click', function() {
+            tapCount++; 
+            clearTimeout(tapTimer);
+            tapTimer = setTimeout(() => { tapCount = 0; }, 2000);
+            if (tapCount === 4) { tapCount = 0; openModal('adminLoginModal'); }
+        });
+
+        function checkAdminLogin() {
+            const pass = document.getElementById('adminPass').value;
+            if (pass === "admin123") {
+                closeModal('adminLoginModal');
+                openModal('adminDashboardModal');
+                loadAdminTabContent();
+            } else {
+                alert('Wrong Password!');
+            }
+        }
+
+        // INSTANT SPEED ENGINE (CACHE + REALTIME FETCH)
+        function fetchGroupsFromFirebase() {
+            // STEP 1: Load instantly from browser memory (0.01s)
+            const cachedData = localStorage.getItem('fast_cached_groups');
+            if (cachedData) {
+                try {
+                    allGroups = JSON.parse(cachedData);
+                    renderMainCategories();
+                } catch(e){}
+            }
+
+            // STEP 2: Fetch fresh data from Firebase Database
+            db.ref('groups').on('value', (snapshot) => {
+                allGroups = [];
+                snapshot.forEach((child) => {
+                    let g = child.val();
+                    g.id = child.key;
+                    allGroups.push(g);
+                });
+                
+                // Save updated groups to Local Storage
+                localStorage.setItem('fast_cached_groups', JSON.stringify(allGroups));
+                
+                renderMainCategories();
+                if (document.getElementById('adminDashboardModal').style.display === 'flex') {
+                    loadAdminTabContent();
+                }
+            });
+
+            db.ref('reports').on('value', (snapshot) => {
+                allReports = [];
+                snapshot.forEach((child) => {
+                    let r = child.val();
+                    r.id = child.key;
+                    allReports.push(r);
+                });
+                if (document.getElementById('adminDashboardModal').style.display === 'flex') {
+                    loadAdminTabContent();
+                }
+            });
+        }
+
+        function renderMainCategories() {
+            const container = document.getElementById('categoriesContainer');
+            
+            let approvedGroups = allGroups.filter(g => !g.status || g.status === 'approved');
+
+            if (approvedGroups.length === 0) {
+                container.innerHTML = '<div class="empty-msg">No approved groups available right now.</div>';
+                return;
+            }
+
+            container.innerHTML = '';
+
+            let sortedCategories = [...categories].sort((a, b) => {
+                let countA = approvedGroups.filter(g => g.category === a).length;
+                let countB = approvedGroups.filter(g => g.category === b).length;
+                return countB - countA;
+            });
+
+            sortedCategories.forEach((cat) => {
+                let catGroups = approvedGroups.filter(g => g.category === cat);
+                if (catGroups.length === 0) return;
+
+                const sec = document.createElement('div');
+                sec.className = 'category-sec';
+
+                let html = `
+                    <div class="category-header">
+                        <span class="category-title">${cat} (${catGroups.length})</span>
+                    </div>
+                    <div class="group-list" id="cat-list-${cat.replace(/\s+/g, '-')}">
+                `;
+
+                let initialLimit = 8;
+                let visibleGroups = catGroups.slice(0, initialLimit);
+
+                visibleGroups.forEach(g => {
+                    html += `
+                        <div class="group-row">
+                            <span class="group-name">${escapeHTML(g.name)}</span>
+                            <div class="group-actions">
+                                <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
+                                <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+
+                if (catGroups.length > initialLimit) {
+                    html += `
+                        <div style="text-align: center; margin-top: 10px;">
+                            <button id="btn-more-${cat.replace(/\s+/g, '-')}" class="btn-banner" style="padding: 6px 15px; font-size: 13px;" onclick="toggleShowMore('${cat}')">Show More ⬇</button>
+                        </div>
+                    `;
+                }
+
+                sec.innerHTML = html;
+                container.appendChild(sec);
+            });
+        }
+
+        function toggleShowMore(categoryName) {
+            let approvedGroups = allGroups.filter(g => (!g.status || g.status === 'approved') && g.category === categoryName);
+            let listContainer = document.getElementById(`cat-list-${categoryName.replace(/\s+/g, '-')}`);
+            let btn = document.getElementById(`btn-more-${categoryName.replace(/\s+/g, '-')}`);
+
+            if (btn.innerText.includes('Show More')) {
+                let html = '';
+                approvedGroups.forEach(g => {
+                    html += `
+                        <div class="group-row">
+                            <span class="group-name">${escapeHTML(g.name)}</span>
+                            <div class="group-actions">
+                                <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
+                                <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                listContainer.innerHTML = html;
+                btn.innerText = 'Show Less ⬆';
+            } else {
+                let html = '';
+                approvedGroups.slice(0, 8).forEach(g => {
+                    html += `
+                        <div class="group-row">
+                            <span class="group-name">${escapeHTML(g.name)}</span>
+                            <div class="group-actions">
+                                <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
+                                <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                listContainer.innerHTML = html;
+                btn.innerText = 'Show More ⬇';
+            }
+        }
+
+        function submitGroup() {
+            const name = document.getElementById('subName').value.trim();
+            const category = document.getElementById('subCategory').value;
+            const country = document.getElementById('subCountry').value;
+            const tags = document.getElementById('subTags').value.trim();
+            const link = document.getElementById('subLink').value.trim();
+            if (!name || !link) { alert('Fill all required fields!'); return; }
+
+            db.ref('groups').push({ name, category, country, tags, link, status: 'pending', timestamp: Date.now() }).then(() => {
+                alert('Group Submitted for Approval!'); 
+                closeModal('submitModal');
+                document.getElementById('subName').value = '';
+                document.getElementById('subLink').value = '';
+            });
+        }
+
+        function openReportModal(id) { 
+            document.getElementById('reportGroupId').value = id; 
+            openModal('reportModal'); 
+        }
+        
+        function sendReport() {
+            const id = document.getElementById('reportGroupId').value;
+            const reason = document.getElementById('reportReason').value.trim();
+            
+            if (!reason) { alert('Please enter a reason for reporting!'); return; }
+            if (!id) { alert('Group ID missing!'); return; }
+
+            db.ref('reports').push({
+                groupId: id,
+                reason: reason,
+                timestamp: Date.now()
+            }).then(() => {
+                alert('Report submitted successfully to Admin!');
+                document.getElementById('reportReason').value = '';
+                closeModal('reportModal');
+            });
+        }
+
+        function switchAdminTab(tabName) {
+            currentTab = tabName;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + tabName).classList.add('active');
+            loadAdminTabContent();
+        }
+
+        function loadAdminTabContent() {
+            const container = document.getElementById('adminListContainer');
+            container.innerHTML = '';
+
+            if (currentTab === 'pending') {
+                const list = allGroups.filter(g => g.status === 'pending');
+                if (list.length === 0) { container.innerHTML = '<div class="empty-msg">No pending groups.</div>'; return; }
+                list.forEach(g => {
+                    container.innerHTML += `
+                        <div class="admin-item">
+                            <b>${escapeHTML(g.name)} (${g.country})</b>
+                            <div><small>Category: ${g.category} | Link: ${escapeHTML(g.link)}</small></div>
+                            <div class="admin-btn-row">
+                                <button class="btn-approve" onclick="db.ref('groups/${g.id}').update({status:'approved'})">Approve</button>
+                                <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else if (currentTab === 'approved') {
+                const list = allGroups.filter(g => g.status === 'approved' || !g.status);
+                if (list.length === 0) { container.innerHTML = '<div class="empty-msg">No approved groups.</div>'; return; }
+                list.forEach(g => {
+                    container.innerHTML += `
+                        <div class="admin-item">
+                            <b>${escapeHTML(g.name)} (${g.country})</b>
+                            <div><small>Category: ${g.category}</small></div>
+                            <div class="admin-btn-row">
+                                <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            } else if (currentTab === 'reports') {
+                if (allReports.length === 0) { container.innerHTML = '<div class="empty-msg">No reports found.</div>'; return; }
+                allReports.forEach(r => {
+                    const group = allGroups.find(g => g.id === r.groupId);
+                    const groupName = group ? group.name : 'Unknown Group';
+                    container.innerHTML += `
+                        <div class="admin-item">
+                            <b>Group: ${escapeHTML(groupName)}</b>
+                            <div><small>Reason: ${escapeHTML(r.reason)}</small></div>
+                            <div class="admin-btn-row">
+                                <button class="btn-delete" onclick="db.ref('reports/${r.id}').remove()">Dismiss</button>
+                                ${group ? `<button class="btn-delete" onclick="db.ref('groups/${r.groupId}').remove(); db.ref('reports/${r.id}').remove();">Delete Group</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        window.onload = function() {
+            populateDropdowns();
+            fetchGroupsFromFirebase();
+        };
+    </script>
+</body>
+</html>

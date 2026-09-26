@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
     
+    <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG (Aap yahan apna code badal sakte hain) -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
+
     <!-- SEO META TAGS -->
     <meta name="description" content="Find and join active WhatsApp group links for Movies, Entertainment, Tech, Jobs, Online Earning, Trading, and Islamic content. Submit your WhatsApp group for free!">
     <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Indian WhatsApp groups, Pakistan WhatsApp groups, WhatsApp group links 2026, online earning WhatsApp groups">
@@ -117,10 +120,13 @@
         .tab-btn { padding: 8px 14px; background: #e2e8f0; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; color: #4a5568; }
         .tab-btn.active { background: #075e54; color: white; }
         .admin-list { display: flex; flex-direction: column; gap: 10px; }
-        .admin-item { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; }
-        .admin-btn-row { display: flex; gap: 8px; margin-top: 8px; }
-        .btn-approve { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
-        .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+        .admin-item { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; word-break: break-all; }
+        .admin-btn-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .btn-approve { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .btn-copy-admin { background: #3182ce; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
+        .admin-link-box a { color: #3182ce; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -277,7 +283,7 @@
 
         function checkAdminLogin() {
             const pass = document.getElementById('adminPass').value;
-            if (pass === "admin123") {
+            if (pass === "ali50") {
                 closeModal('adminLoginModal');
                 openModal('adminDashboardModal');
                 loadAdminTabContent();
@@ -286,9 +292,18 @@
             }
         }
 
+        // COPY LINK FUNCTION FOR ADMIN
+        function copyGroupLink(link) {
+            if(!link) { alert('No link available'); return; }
+            navigator.clipboard.writeText(link).then(() => {
+                alert('📋 WhatsApp Group Link Copied!');
+            }).catch(() => {
+                alert('Failed to copy link');
+            });
+        }
+
         // INSTANT SPEED ENGINE (CACHE + REALTIME FETCH)
         function fetchGroupsFromFirebase() {
-            // STEP 1: Load instantly from browser memory (0.01s)
             const cachedData = localStorage.getItem('fast_cached_groups');
             if (cachedData) {
                 try {
@@ -297,7 +312,6 @@
                 } catch(e){}
             }
 
-            // STEP 2: Fetch fresh data from Firebase Database
             db.ref('groups').on('value', (snapshot) => {
                 allGroups = [];
                 snapshot.forEach((child) => {
@@ -306,9 +320,7 @@
                     allGroups.push(g);
                 });
                 
-                // Save updated groups to Local Storage
                 localStorage.setItem('fast_cached_groups', JSON.stringify(allGroups));
-                
                 renderMainCategories();
                 if (document.getElementById('adminDashboardModal').style.display === 'flex') {
                     loadAdminTabContent();
@@ -330,7 +342,6 @@
 
         function renderMainCategories() {
             const container = document.getElementById('categoriesContainer');
-            
             let approvedGroups = allGroups.filter(g => !g.status || g.status === 'approved');
 
             if (approvedGroups.length === 0) {
@@ -402,7 +413,7 @@
                         <div class="group-row">
                             <span class="group-name">${escapeHTML(g.name)}</span>
                             <div class="group-actions">
-                                <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
+                                 <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
                                 <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
                             </div>
                         </div>
@@ -484,10 +495,12 @@
                 list.forEach(g => {
                     container.innerHTML += `
                         <div class="admin-item">
-                            <b>${escapeHTML(g.name)} (${g.country})</b>
-                            <div><small>Category: ${g.category} | Link: ${escapeHTML(g.link)}</small></div>
+                            <b>${escapeHTML(g.name)} (${escapeHTML(g.country)})</b>
+                            <div class="admin-link-box">Category: ${escapeHTML(g.category)}</div>
+                            <div class="admin-link-box">Link: <a href="${escapeHTML(g.link)}" target="_blank">${escapeHTML(g.link)}</a></div>
                             <div class="admin-btn-row">
                                 <button class="btn-approve" onclick="db.ref('groups/${g.id}').update({status:'approved'})">Approve</button>
+                                <button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(g.link)}')">📋 Copy Link</button>
                                 <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
                             </div>
                         </div>
@@ -499,9 +512,11 @@
                 list.forEach(g => {
                     container.innerHTML += `
                         <div class="admin-item">
-                            <b>${escapeHTML(g.name)} (${g.country})</b>
-                            <div><small>Category: ${g.category}</small></div>
+                            <b>${escapeHTML(g.name)} (${escapeHTML(g.country || 'Global')})</b>
+                            <div class="admin-link-box">Category: ${escapeHTML(g.category || 'General')}</div>
+                            <div class="admin-link-box">Link: <a href="${escapeHTML(g.link)}" target="_blank">${escapeHTML(g.link || 'No link')}</a></div>
                             <div class="admin-btn-row">
+                                <button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(g.link)}')">📋 Copy Link</button>
                                 <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
                             </div>
                         </div>
@@ -512,12 +527,15 @@
                 allReports.forEach(r => {
                     const group = allGroups.find(g => g.id === r.groupId);
                     const groupName = group ? group.name : 'Unknown Group';
+                    const groupLink = group ? group.link : '';
                     container.innerHTML += `
                         <div class="admin-item">
                             <b>Group: ${escapeHTML(groupName)}</b>
                             <div><small>Reason: ${escapeHTML(r.reason)}</small></div>
+                            ${groupLink ? `<div class="admin-link-box">Link: <a href="${escapeHTML(groupLink)}" target="_blank">${escapeHTML(groupLink)}</a></div>` : ''}
                             <div class="admin-btn-row">
                                 <button class="btn-delete" onclick="db.ref('reports/${r.id}').remove()">Dismiss</button>
+                                ${groupLink ? `<button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(groupLink)}')">📋 Copy Link</button>` : ''}
                                 ${group ? `<button class="btn-delete" onclick="db.ref('groups/${r.groupId}').remove(); db.ref('reports/${r.id}').remove();">Delete Group</button>` : ''}
                             </div>
                         </div>

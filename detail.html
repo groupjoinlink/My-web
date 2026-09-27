@@ -197,6 +197,12 @@
             startCountdown(groupLink);
         }
 
+        function incrementGroupClicks(groupId) {
+            db.ref('groups/' + groupId + '/clicks').transaction((currentClicks) => {
+                return (currentClicks || 0) + 1;
+            });
+        }
+
         function loadGroupData() {
             const groupId = getQueryParam('id');
             
@@ -204,6 +210,9 @@
                 document.getElementById('detailCard').innerHTML = '<p>Group Not Found!</p><a href="index.html" class="btn-back">⬅ Back to Home</a>';
                 return;
             }
+
+            // AUTO INCREMENT CLICKS IN FIREBASE
+            incrementGroupClicks(groupId);
 
             const cachedData = localStorage.getItem('fast_cached_groups');
             if (cachedData) {

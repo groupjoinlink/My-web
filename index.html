@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,15 +5,15 @@
   
   <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
   
-  <!-- SEO Keywords / Meta Tags -->
-  <meta name="description" content="Join active WhatsApp group links for Earning, Jobs, Movies, Gaming, Trading, Islamic content, Sri Lanka, Russia, Pakistan, India, USA, and worldwide.">
-  <meta name="keywords" content="WhatsApp group links, Online Earning WhatsApp groups, Job WhatsApp groups, Movie WhatsApp group links, Crypto Trading WhatsApp groups, Islamic WhatsApp groups, Gaming WhatsApp groups, Sri Lankan WhatsApp group, Russian WhatsApp group, Pakistani WhatsApp groups">
+  <!-- SEO Meta Keywords (Categories + Countries + Keywords) -->
+<meta name="keywords" content="Pakistan WhatsApp group links, Indian WhatsApp group, Russian WhatsApp group, Sri Lankan WhatsApp group, popular country WhatsApp groups, Online Earning WhatsApp Group Links, Job Alerts WhatsApp Groups, Crypto Trading Signals Free, Hindi Dubbed Movies WhatsApp Groups, Daily Quran and Hadith WhatsApp Link, PUBG Pakistan Free Fire Gaming Groups, Free Internet Tricks Tech Mod APKs, Live Cricket Streaming PSL IPL Links, Viral Status Videos Entertainment Groups">
+<!-- SEO Meta Description -->
+<meta name="description" content="Join unlimited real WhatsApp groups, active new groups, popular top WhatsApp group join links. Find Pakistan, Indian, Russian, Sri Lankan, and worldwide active groups for Online Earning, Jobs, Trading, Movies, Islamic Content, and Gaming.">
   <meta name="robots" content="index, follow">
 
   <!-- 1. Sitemap Link -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://groupjoinlink.github.io/My-web/sitemap.xml" />
   <link rel="icon" type="image/jpeg" href="1790478455723.jpg">
-
 
   <!-- 2. Google Site Verification Tag -->
   <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
@@ -43,10 +42,9 @@
   }
   </script>
 
-  <!-- FIREBASE SDKs (Head ke andar shift kar diye hain) -->
+  <!-- FIREBASE SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-</head>
 
   <style>
       * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -151,6 +149,7 @@
       .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
       .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
       .admin-link-box a { color: #3182ce; text-decoration: underline; }
+      .clicks-badge { background: #edf2f7; color: #2d3748; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 5px; border: 1px solid #cbd5e0; }
   </style>
 </head>
 <body>
@@ -158,9 +157,8 @@
     <!-- GREEN TOP SECTION -->
     <div class="top-green-section">
         <h1 id="siteTitle">Whats Group Join Links</h1>
-<h2>Active Whatsapp group</h2>
+        <h2>Active Whatsapp group</h2>
 
-        
         <div class="hero-btns">
             <a href="https://whatsapp.com/channel/0029Vb8rlsx7T8bfdsy24Z17" target="_blank" class="btn-banner btn-left">Join Our Community</a>
             <button class="btn-banner btn-right" onclick="openModal('submitModal')">Submit Group</button>
@@ -169,7 +167,6 @@
 
     <!-- MAIN CATEGORIES & GROUPS -->
     <div class="container" id="categoriesContainer">
-        <!-- FULL SCREEN SKELETON PLACEHOLDER -->
         <div class="skeleton-sec">
             <div class="skeleton-head"></div>
             <div class="skeleton-box"></div>
@@ -179,11 +176,6 @@
         <div class="skeleton-sec">
             <div class="skeleton-head"></div>
             <div class="skeleton-box"></div>
-            <div class="skeleton-box"></div>
-            <div class="skeleton-box"></div>
-        </div>
-        <div class="skeleton-sec">
-            <div class="skeleton-head"></div>
             <div class="skeleton-box"></div>
             <div class="skeleton-box"></div>
         </div>
@@ -223,7 +215,10 @@
         <div class="modal-content">
             <h3>Report Group</h3>
             <input type="hidden" id="reportGroupId">
-            <textarea id="reportReason" rows="3" placeholder="Reason for report..."></textarea>
+            <div class="form-group">
+                <label>Reason for Report</label>
+                <textarea id="reportReason" rows="3" placeholder="Enter details why this group is invalid or broken..."></textarea>
+            </div>
             <button class="btn-banner btn-left" style="width:100%; margin-top:8px;" onclick="sendReport()">Submit Report</button>
             <button class="btn-close" onclick="closeModal('reportModal')">Close</button>
         </div>
@@ -317,7 +312,6 @@
             }
         }
 
-        // COPY LINK FUNCTION FOR ADMIN
         function copyGroupLink(link) {
             if(!link) { alert('No link available'); return; }
             navigator.clipboard.writeText(link).then(() => {
@@ -327,7 +321,21 @@
             });
         }
 
-        // INSTANT SPEED ENGINE (CACHE + REALTIME FETCH)
+        // AUTO-DELETE GROUP ALONG WITH ITS REPORTS
+        function deleteGroupAndReports(groupId) {
+            if (!groupId) return;
+            
+            db.ref('groups/' + groupId).remove();
+
+            db.ref('reports').once('value', (snapshot) => {
+                snapshot.forEach((child) => {
+                    if (child.val().groupId === groupId) {
+                        db.ref('reports/' + child.key).remove();
+                    }
+                });
+            });
+        }
+
         function fetchGroupsFromFirebase() {
             const cachedData = localStorage.getItem('fast_cached_groups');
             if (cachedData) {
@@ -403,7 +411,7 @@
                     html += `
                         <div class="group-row">
                             <span class="group-name">${escapeHTML(g.name)}</span>
-                            <div class="group-actions">
+                             <div class="group-actions">
                                 <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
                                 <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
                             </div>
@@ -464,27 +472,54 @@
             }
         }
 
+        // SUBMIT GROUP FUNCTION
         function submitGroup() {
-            const name = document.getElementById('subName').value.trim();
-            const category = document.getElementById('subCategory').value;
-            const country = document.getElementById('subCountry').value;
-            const tags = document.getElementById('subTags').value.trim();
-            const link = document.getElementById('subLink').value.trim();
-            if (!name || !link) { alert('Fill all required fields!'); return; }
+          const name = document.getElementById('subName').value.trim();
+          const category = document.getElementById('subCategory').value;
+          const country = document.getElementById('subCountry').value;
+          const tags = document.getElementById('subTags').value.trim();
+          const link = document.getElementById('subLink').value.trim();
 
-            db.ref('groups').push({ name, category, country, tags, link, status: 'pending', timestamp: Date.now() }).then(() => {
-                alert('Group Submitted for Approval!'); 
-                closeModal('submitModal');
-                document.getElementById('subName').value = '';
-                document.getElementById('subLink').value = '';
-            });
+          if (!name || !link) {
+            alert('Please fill all required fields!');
+            return;
+          }
+
+          const isDuplicate = allGroups.some(g => g.link && g.link.trim().toLowerCase() === link.toLowerCase());
+
+          if (isDuplicate) {
+            alert('⚠️ Yeh WhatsApp group link pehle se submit hua parha hai!');
+            return;
+          }
+
+          db.ref('groups').push({
+            name: name,
+            category: category,
+            country: country,
+            tags: tags,
+            link: link,
+            clicks: 0,
+            status: 'pending',
+            timestamp: Date.now()
+          }).then(() => {
+            alert('Group Submitted for Review!');
+            closeModal('submitModal');
+            document.getElementById('subName').value = '';
+            document.getElementById('subTags').value = '';
+            document.getElementById('subLink').value = '';
+          }).catch(err => {
+            alert('Submission Failed: ' + err.message);
+          });
         }
 
+        // REPORT MODAL OPEN
         function openReportModal(id) { 
             document.getElementById('reportGroupId').value = id; 
+            document.getElementById('reportReason').value = ''; 
             openModal('reportModal'); 
         }
         
+        // REPORT SUBMIT FUNCTION
         function sendReport() {
             const id = document.getElementById('reportGroupId').value;
             const reason = document.getElementById('reportReason').value.trim();
@@ -497,9 +532,11 @@
                 reason: reason,
                 timestamp: Date.now()
             }).then(() => {
-                alert('Report submitted successfully to Admin!');
+                alert('✅ Report submitted successfully to Admin!');
                 document.getElementById('reportReason').value = '';
                 closeModal('reportModal');
+            }).catch((err) => {
+                alert('Report Submission Error: ' + err.message);
             });
         }
 
@@ -526,7 +563,7 @@
                             <div class="admin-btn-row">
                                 <button class="btn-approve" onclick="db.ref('groups/${g.id}').update({status:'approved'})">Approve</button>
                                 <button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(g.link)}')">📋 Copy Link</button>
-                                <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
+                                <button class="btn-delete" onclick="deleteGroupAndReports('${g.id}')">Delete</button>
                             </div>
                         </div>
                     `;
@@ -535,14 +572,16 @@
                 const list = allGroups.filter(g => g.status === 'approved' || !g.status);
                 if (list.length === 0) { container.innerHTML = '<div class="empty-msg">No approved groups.</div>'; return; }
                 list.forEach(g => {
+                    const clickCount = g.clicks || 0;
                     container.innerHTML += `
                         <div class="admin-item">
                             <b>${escapeHTML(g.name)} (${escapeHTML(g.country || 'Global')})</b>
+                            <div class="clicks-badge">👁️ Total Clicks: ${clickCount}</div>
                             <div class="admin-link-box">Category: ${escapeHTML(g.category || 'General')}</div>
                             <div class="admin-link-box">Link: <a href="${escapeHTML(g.link)}" target="_blank">${escapeHTML(g.link || 'No link')}</a></div>
                             <div class="admin-btn-row">
                                 <button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(g.link)}')">📋 Copy Link</button>
-                                <button class="btn-delete" onclick="db.ref('groups/${g.id}').remove()">Delete</button>
+                                <button class="btn-delete" onclick="deleteGroupAndReports('${g.id}')">Delete</button>
                             </div>
                         </div>
                     `;
@@ -561,7 +600,7 @@
                             <div class="admin-btn-row">
                                 <button class="btn-delete" onclick="db.ref('reports/${r.id}').remove()">Dismiss</button>
                                 ${groupLink ? `<button class="btn-copy-admin" onclick="copyGroupLink('${escapeHTML(groupLink)}')">📋 Copy Link</button>` : ''}
-                                ${group ? `<button class="btn-delete" onclick="db.ref('groups/${r.groupId}').remove(); db.ref('reports/${r.id}').remove();">Delete Group</button>` : ''}
+                                ${group ? `<button class="btn-delete" onclick="deleteGroupAndReports('${r.groupId}')">Delete Group</button>` : ''}
                             </div>
                         </div>
                     `;
@@ -574,18 +613,19 @@
             fetchGroupsFromFirebase();
         };
     </script>
+
   <!-- FOOTER TEXT SECTION -->
-<footer style="background-color: #f8f9fa; border-top: 1px solid #e9ecef; padding: 25px 15px; margin-top: 30px; text-align: center; color: #555; font-size: 14px; line-height: 1.6;">
-  <div style="max-width: 800px; margin: 0 auto;">
-    <h3 style="color: #075e54; margin-bottom: 10px; font-size: 18px;">About Whats Group Join Links</h3>
-    <p style="margin-bottom: 15px;">
-      Welcome to <strong>Whats Group Join Links</strong>, your ultimate hub for active WhatsApp group links worldwide. Find and join groups from Pakistan, India, Sri Lanka, Russia, USA, and globally across categories like Online Earning, Jobs, Movies, Crypto Trading, Islamic Content, and Gaming.
-    </p>
-    <p style="font-size: 12px; color: #777; margin-bottom: 0;">
-      © 2026 Whats Group Join Links. All rights reserved.
-    </p>
-  </div>
-</footer>
+  <footer style="background-color: #f8f9fa; border-top: 1px solid #e9ecef; padding: 25px 15px; margin-top: 30px; text-align: center; color: #555; font-size: 14px; line-height: 1.6;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h3 style="color: #075e54; margin-bottom: 10px; font-size: 18px;">About Whats Group Join Links</h3>
+      <p style="margin-bottom: 15px;">
+        Welcome to <strong>Whats Group Join Links</strong>, your ultimate hub for active WhatsApp group links worldwide. Find and join groups from Pakistan, India, Sri Lanka, Russia, USA, and globally across categories like Online Earning, Jobs, Movies, Crypto Trading, Islamic Content, and Gaming.
+      </p>
+      <p style="font-size: 12px; color: #777; margin-bottom: 0;">
+        © 2026 Whats Group Join Links. All rights reserved.
+      </p>
+    </div>
+  </footer>
 
 </body>
-</>
+</html>      

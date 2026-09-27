@@ -3,144 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
-  <meta property="og:site_name" content="Whats Group Join Links">
+  
+  <!-- SEO Keywords / Meta Tags -->
+  <meta name="description" content="Join active WhatsApp group links for Earning, Jobs, Movies, Gaming, Trading, Islamic content, Sri Lanka, Russia, Pakistan, India, USA, and worldwide.">
+  <meta name="keywords" content="WhatsApp group links, Online Earning WhatsApp groups, Job WhatsApp groups, Movie WhatsApp group links, Crypto Trading WhatsApp groups, Islamic WhatsApp groups, Gaming WhatsApp groups, Sri Lankan WhatsApp group, Russian WhatsApp group, Pakistani WhatsApp groups">
+  <meta name="robots" content="index, follow">
+
+  <!-- 1. Sitemap Link -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://groupjoinlink.github.io/My-web/sitemap.xml" />
   <link rel="icon" type="image/jpeg" href="1790478455723.jpg">
-<link rel="apple-touch-icon" href="1790478455723.jpg">
 
 
-    <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG (Aap yahan apna code badal sakte hain) -->
-    <meta name="google-site-verification" content="S_GASZz7zThUfioFE9Cj6_iLqirxI2btdSTBnSJp1t8" />
+  <!-- 2. Google Site Verification Tag -->
+  <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
 
-    <!-- SEO META TAGS -->
-    <meta name="description" content="Find and join active WhatsApp group links for Movies, Entertainment, Tech, Jobs, Online Earning, Trading, and Islamic content. Submit your WhatsApp group for free!">
-    <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Indian WhatsApp groups, Pakistan WhatsApp groups, WhatsApp group links 2026, online earning WhatsApp groups">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Whats group join links">
-    <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Sri Lanka WhatsApp group links, Russian WhatsApp group links, Indian WhatsApp group links, Pakistani WhatsApp group links, USA WhatsApp groups, popular group join links">
+  <!-- 3. Canonical Link -->
+  <link rel="canonical" href="https://groupjoinlink.github.io/My-web/" />
 
+  <!-- 4. Open Graph Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://groupjoinlink.github.io/My-web/" />
+  <meta property="og:title" content="Whats Group Join Links - Earning, Jobs, Movies & Global Groups" />
+  <meta property="og:description" content="Find active WhatsApp groups for Earning, Jobs, Trading, Movies, Islamic, Sri Lanka, Russia, and more." />
 
-    <!-- OPEN GRAPH META TAGS -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="[https://groupjoinlink.github.io/My-web/](https://groupjoinlink.github.io/My-web/)">
-    <meta property="og:title" content="Whats Group Join Links - Active WhatsApp Groups">
-    <meta property="og:description" content="Join 1000+ active WhatsApp groups in categories like Movies, Gaming, Tech, Online Earning & Jobs.">
+  <!-- 5. Schema Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Whats Group Join Links",
+    "url": "https://groupjoinlink.github.io/My-web/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://groupjoinlink.github.io/My-web/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
 
-    <!-- FIREBASE SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  <!-- FIREBASE SDKs (Head ke andar shift kar diye hain) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f0f2f5; color: #1c1e21; padding-bottom: 30px; }
+  <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+      body { background-color: #f0f2f5; color: #1c1e21; padding-bottom: 30px; }
 
-        .top-green-section { 
-            background: #075e54; 
-            color: white; 
-            padding: 22px 15px 25px; 
-            text-align: center; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
-        }
-        .top-green-section h1 { 
-            font-size: 22px; 
-            font-weight: 700; 
-            margin-bottom: 6px; 
-            cursor: pointer; 
-            user-select: none;
-        }
-        .top-green-section h2 { 
-            font-size: 15px; 
-            font-weight: 400; 
-            opacity: 0.9; 
-            margin-bottom: 18px; 
-        }
+      .top-green-section { 
+          background: #075e54; 
+          color: white; 
+          padding: 22px 15px 25px; 
+          text-align: center; 
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2); 
+      }
+      .top-green-section h1 { 
+          font-size: 22px; 
+          font-weight: 700; 
+          margin-bottom: 6px; 
+          cursor: pointer; 
+          user-select: none;
+      }
+      .top-green-section h2 { 
+          font-size: 15px; 
+          font-weight: 400; 
+          opacity: 0.9; 
+          margin-bottom: 18px; 
+      }
 
-        .hero-btns { display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; gap: 12px; }
-        .btn-banner { flex: 1; padding: 12px 8px; border-radius: 6px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; font-size: 13px; text-align: center; }
-        .btn-left { background-color: #25d366; color: white; }
-        .btn-right { background-color: #ffffff; color: #075e54; }
+      .hero-btns { display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; gap: 12px; }
+      .btn-banner { flex: 1; padding: 12px 8px; border-radius: 6px; font-weight: bold; text-decoration: none; border: none; cursor: pointer; font-size: 13px; text-align: center; }
+      .btn-left { background-color: #25d366; color: white; }
+      .btn-right { background-color: #ffffff; color: #075e54; }
 
-        .container { max-width: 700px; margin: 20px auto 0; padding: 0 12px; }
-        
-        .category-sec { background: white; border-radius: 10px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .category-header { border-bottom: 2px solid #25d366; padding-bottom: 8px; margin-bottom: 12px; }
-        .category-title { font-size: 17px; color: #075e54; font-weight: bold; }
+      .container { max-width: 700px; margin: 20px auto 0; padding: 0 12px; }
+      
+      .category-sec { background: white; border-radius: 10px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+      .category-header { border-bottom: 2px solid #25d366; padding-bottom: 8px; margin-bottom: 12px; }
+      .category-title { font-size: 17px; color: #075e54; font-weight: bold; }
 
-        .group-list { display: flex; flex-direction: column; gap: 10px; }
-        .group-row { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: #fafafa; 
-            padding: 12px 14px; 
-            border-radius: 8px; 
-            border: 1px solid #e2e8f0; 
-        }
-        .group-name { font-size: 15px; font-weight: 600; color: #2d3748; word-break: break-word; flex: 1; padding-right: 10px; }
-        
-        .group-actions { display: flex; align-items: center; gap: 10px; }
-        .btn-click-join { background: #25d366; color: white; text-decoration: none; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; white-space: nowrap; }
-        .btn-report-mini { background: none; border: none; color: #e53e3e; font-size: 12px; cursor: pointer; font-weight: 600; text-decoration: underline; }
+      .group-list { display: flex; flex-direction: column; gap: 10px; }
+      .group-row { 
+          display: flex; 
+          justify-content: space-between; 
+          align-items: center; 
+          background: #fafafa; 
+          padding: 12px 14px; 
+          border-radius: 8px; 
+          border: 1px solid #e2e8f0; 
+      }
+      .group-name { font-size: 15px; font-weight: 600; color: #2d3748; word-break: break-word; flex: 1; padding-right: 10px; }
+      
+      .group-actions { display: flex; align-items: center; gap: 10px; }
+      .btn-click-join { background: #25d366; color: white; text-decoration: none; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; white-space: nowrap; }
+      .btn-report-mini { background: none; border: none; color: #e53e3e; font-size: 12px; cursor: pointer; font-weight: 600; text-decoration: underline; }
 
-        /* FULL PAGE SKELETON ANIMATION */
-        .skeleton-sec {
-            background: white;
-            border-radius: 10px;
-            padding: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-        .skeleton-head {
-            height: 24px;
-            width: 40%;
-            background: #e0e0e0;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-        .skeleton-box { 
-            height: 48px; 
-            width: 100%;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%); 
-            background-size: 200% 100%; 
-            animation: loading 1.2s infinite; 
-            border-radius: 8px; 
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
+      /* SKELETON ANIMATION */
+      .skeleton-sec {
+          background: white;
+          border-radius: 10px;
+          padding: 16px;
+          margin-bottom: 20px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .skeleton-head {
+          height: 24px;
+          width: 40%;
+          background: #e0e0e0;
+          margin-bottom: 15px;
+          border-radius: 4px;
+      }
+      .skeleton-box { 
+          height: 48px; 
+          width: 100%;
+          margin-bottom: 10px;
+          background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%); 
+          background-size: 200% 100%; 
+          animation: loading 1.2s infinite; 
+          border-radius: 8px; 
+      }
+      @keyframes loading {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
+      }
 
-        .empty-msg { color: #4a5568; font-size: 14px; text-align: center; padding: 25px 0; font-weight: 500; }
+      .empty-msg { color: #4a5568; font-size: 14px; text-align: center; padding: 25px 0; font-weight: 500; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
-        .modal-content { background: white; padding: 22px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
-        .modal-content h3 { margin-bottom: 16px; color: #075e54; font-size: 20px; text-align: center; }
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #4a5568; }
-        .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 14px; }
-        .btn-close { background: #e53e3e; color: white; border: none; padding: 9px; border-radius: 6px; cursor: pointer; margin-top: 8px; width: 100%; font-weight: bold; }
+      .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; padding: 15px; }
+      .modal-content { background: white; padding: 22px; border-radius: 12px; width: 100%; max-width: 450px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
+      .modal-content h3 { margin-bottom: 16px; color: #075e54; font-size: 20px; text-align: center; }
+      .form-group { margin-bottom: 12px; text-align: left; }
+      .form-group label { display: block; font-size: 12px; font-weight: bold; margin-bottom: 4px; color: #4a5568; }
+      .modal-content input, .modal-content select, .modal-content textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 14px; }
+      .btn-close { background: #e53e3e; color: white; border: none; padding: 9px; border-radius: 6px; cursor: pointer; margin-top: 8px; width: 100%; font-weight: bold; }
 
-        .admin-dashboard { width: 100%; max-width: 800px; }
-        .admin-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
-        .tab-btn { padding: 8px 14px; background: #e2e8f0; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; color: #4a5568; }
-        .tab-btn.active { background: #075e54; color: white; }
-        .admin-list { display: flex; flex-direction: column; gap: 10px; }
-        .admin-item { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; word-break: break-all; }
-        .admin-btn-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-        .btn-approve { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
-        .btn-copy-admin { background: #3182ce; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
-        .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
-        .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
-        .admin-link-box a { color: #3182ce; text-decoration: underline; }
-    </style>
-</>
+      .admin-dashboard { width: 100%; max-width: 800px; }
+      .admin-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+      .tab-btn { padding: 8px 14px; background: #e2e8f0; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; color: #4a5568; }
+      .tab-btn.active { background: #075e54; color: white; }
+      .admin-list { display: flex; flex-direction: column; gap: 10px; }
+      .admin-item { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; text-align: left; word-break: break-all; }
+      .admin-btn-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+      .btn-approve { background: #38a169; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+      .btn-copy-admin { background: #3182ce; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+      .btn-delete { background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: bold; }
+      .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
+      .admin-link-box a { color: #3182ce; text-decoration: underline; }
+  </style>
+</head>
 <body>
 
     <!-- GREEN TOP SECTION -->
     <div class="top-green-section">
         <h1 id="siteTitle">Whats Group Join Links</h1>
-        <h2>Active Whatsapp group</h2>
+<h2>Active Whatsapp group</h2>
+
         
         <div class="hero-btns">
             <a href="https://whatsapp.com/channel/0029Vb8rlsx7T8bfdsy24Z17" target="_blank" class="btn-banner btn-left">Join Our Community</a>
@@ -241,7 +260,7 @@
             "India", "Pakistan", "Nigeria", "Sri Lanka" , "Indonesia", "Brazil", 
             "Bangladesh", "Egypt", "Saudi Arabia", "UAE (Dubai)", "Kenya", 
             "Ghana", "South Africa", "Nepal", "Malaysia", "Philippines", 
-            "Iraq", "Algeria", "Turkey", "Morocco", "Qatar" , "United State" , "Other Country" 
+            "Iraq", "Algeria", "Turkey", "Morocco", "Qatar" , "United State" ,"Other Country"
         ];
 
         // FIREBASE CONFIGURATION
@@ -419,7 +438,7 @@
                         <div class="group-row">
                             <span class="group-name">${escapeHTML(g.name)}</span>
                             <div class="group-actions">
-                                 <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
+                                <a href="detail.html?id=${g.id}" class="btn-click-join">Click Join</a>
                                 <button class="btn-report-mini" onclick="openReportModal('${g.id}')">Report</button>
                             </div>
                         </div>
@@ -446,46 +465,20 @@
         }
 
         function submitGroup() {
-    const name = document.getElementById('groupName').value.trim();
-    const category = document.getElementById('groupCategory').value;
-    const country = document.getElementById('groupCountry').value;
-    const tags = document.getElementById('groupTags').value.trim();
-    const link = document.getElementById('groupLink').value.trim();
+            const name = document.getElementById('subName').value.trim();
+            const category = document.getElementById('subCategory').value;
+            const country = document.getElementById('subCountry').value;
+            const tags = document.getElementById('subTags').value.trim();
+            const link = document.getElementById('subLink').value.trim();
+            if (!name || !link) { alert('Fill all required fields!'); return; }
 
-    if (!name || !link) {
-        alert('Please fill in required fields.');
-        return;
-    }
-
-    // Duplicate check and push to Firebase
-    db.ref('groups').orderByChild('link').equalTo(link).once('value', snapshot => {
-        if (snapshot.exists()) {
-            alert('Already exist!');
-        } else {
-            db.ref('groups').push({
-                name: name,
-                category: category,
-                country: country,
-                tags: tags,
-                link: link,
-                status: 'pending',
-                timestamp: Date.now()
-            }).then(() => {
-                alert('Group Submitted for approval!');
+            db.ref('groups').push({ name, category, country, tags, link, status: 'pending', timestamp: Date.now() }).then(() => {
+                alert('Group Submitted for Approval!'); 
                 closeModal('submitModal');
-                document.getElementById('groupName').value = '';
-                document.getElementById('groupLink').value = '';
-                
-                // Refresh list so it shows in Admin Pending tab immediately
-                if (typeof fetchGroupsFromFirebase === 'function') {
-                    fetchGroupsFromFirebase();
-                }
+                document.getElementById('subName').value = '';
+                document.getElementById('subLink').value = '';
             });
         }
-    });
-}
-
-
 
         function openReportModal(id) { 
             document.getElementById('reportGroupId').value = id; 
@@ -581,36 +574,18 @@
             fetchGroupsFromFirebase();
         };
     </script>
-     <!-- ABOUT & SEO SECTION -->
-  <section style="padding: 20px; max-width: 800px; margin: 20px auto; background: #ffffff; border-radius: 8px; font-family: sans-serif; color: #333; line-height: 1.6;">
-    
-    <h2 style="color: #075e54;">About Whats Group Join Links</h2>
-    <p>Welcome to <strong>Whats Group Join Links</strong>, your ultimate destination for finding active and updated WhatsApp group links. Whether you are looking for educational groups, tech discussions, entertainment, business networking, or sports updates, we provide direct join links for top active communities worldwide.</p>
-
-    <h3 style="color: #128c7e;">How to Join WhatsApp Groups?</h3>
-    <ol style="padding-left: 20px;">
-      <li>Browse through our category list and select your desired group category.</li>
-      <li>Click on the <strong>Join Group</strong> button next to the group name.</li>
-      <li>You will be redirected to WhatsApp; simply tap <strong>Join Chat</strong> to enter the group.</li>
-    </ol>
-
-    <h3 style="color: #128c7e;">WhatsApp Group Rules</h3>
-    <ul style="padding-left: 20px;">
-      <li>Respect all group members and admin decisions.</li>
-      <li>Do not post spam, fake news, or irrelevant promotional links.</li>
-      <li>Keep discussions focused on the group topic.</li>
-      <li>Personal messaging members without consent is strictly prohibited.</li>
-    </ul>
-
-    <h3 style="color: #d32f2f;">Disclaimer</h3>
-    <p style="font-size: 0.9em; color: #666;">We are not affiliated with WhatsApp Inc. All group links are submitted by users or collected from public domains. Group admins are solely responsible for their content. Join groups at your own discretion.</p>
-
-  </section>
-
-  <!-- FOOTER -->
-  <footer style="text-align: center; padding: 15px; background: #075e54; color: #ffffff; font-family: sans-serif; font-size: 0.9em; margin-top: 30px;">
-    <p>&copy; 2026 Whats Group Join Links. All rights reserved.</p>
-  </footer>
+  <!-- FOOTER TEXT SECTION -->
+<footer style="background-color: #f8f9fa; border-top: 1px solid #e9ecef; padding: 25px 15px; margin-top: 30px; text-align: center; color: #555; font-size: 14px; line-height: 1.6;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h3 style="color: #075e54; margin-bottom: 10px; font-size: 18px;">About Whats Group Join Links</h3>
+    <p style="margin-bottom: 15px;">
+      Welcome to <strong>Whats Group Join Links</strong>, your ultimate hub for active WhatsApp group links worldwide. Find and join groups from Pakistan, India, Sri Lanka, Russia, USA, and globally across categories like Online Earning, Jobs, Movies, Crypto Trading, Islamic Content, and Gaming.
+    </p>
+    <p style="font-size: 12px; color: #777; margin-bottom: 0;">
+      © 2026 Whats Group Join Links. All rights reserved.
+    </p>
+  </div>
+</footer>
 
 </body>
-</html>
+</>

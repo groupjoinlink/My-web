@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whats Group Join Links - Unlimited Active WhatsApp Groups</title>
+  <meta property="og:site_name" content="Whats Group Join Links">
+  <link rel="icon" type="image/jpeg" href="1790478455723.jpg">
+<link rel="apple-touch-icon" href="1790478455723.jpg">
+
+
     <!-- GOOGLE SEARCH CONSOLE VERIFICATION TAG (Aap yahan apna code badal sakte hain) -->
     <meta name="google-site-verification" content="S_GASZz7zThUfioFE9Cj6_iLqirxI2btdSTBnSJp1t8" />
 
@@ -13,6 +17,8 @@
     <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Indian WhatsApp groups, Pakistan WhatsApp groups, WhatsApp group links 2026, online earning WhatsApp groups">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Whats group join links">
+    <meta name="keywords" content="WhatsApp group links, join active WhatsApp groups, Sri Lanka WhatsApp group links, Russian WhatsApp group links, Indian WhatsApp group links, Pakistani WhatsApp group links, USA WhatsApp groups, popular group join links">
+
 
     <!-- OPEN GRAPH META TAGS -->
     <meta property="og:type" content="website">
@@ -128,7 +134,7 @@
         .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
         .admin-link-box a { color: #3182ce; text-decoration: underline; }
     </style>
-</head>
+</>
 <body>
 
     <!-- GREEN TOP SECTION -->
@@ -232,10 +238,10 @@
         const categories = ["Entertainment", "Islamic", "Videos", "Sports", "Movies", "Gaming", "Trading", "Tech & Mobile", "Online Earning", "Jobs"];
         
         const countries = [
-            "India", "Pakistan", "Nigeria", "Indonesia", "Brazil", 
+            "India", "Pakistan", "Nigeria", "Sri Lanka" , "Indonesia", "Brazil", 
             "Bangladesh", "Egypt", "Saudi Arabia", "UAE (Dubai)", "Kenya", 
             "Ghana", "South Africa", "Nepal", "Malaysia", "Philippines", 
-            "Iraq", "Algeria", "Turkey", "Morocco", "Qatar"
+            "Iraq", "Algeria", "Turkey", "Morocco", "Qatar" , "United State" , "Other Country" 
         ];
 
         // FIREBASE CONFIGURATION
@@ -440,20 +446,46 @@
         }
 
         function submitGroup() {
-            const name = document.getElementById('subName').value.trim();
-            const category = document.getElementById('subCategory').value;
-            const country = document.getElementById('subCountry').value;
-            const tags = document.getElementById('subTags').value.trim();
-            const link = document.getElementById('subLink').value.trim();
-            if (!name || !link) { alert('Fill all required fields!'); return; }
+    const name = document.getElementById('groupName').value.trim();
+    const category = document.getElementById('groupCategory').value;
+    const country = document.getElementById('groupCountry').value;
+    const tags = document.getElementById('groupTags').value.trim();
+    const link = document.getElementById('groupLink').value.trim();
 
-            db.ref('groups').push({ name, category, country, tags, link, status: 'pending', timestamp: Date.now() }).then(() => {
-                alert('Group Submitted for Approval!'); 
+    if (!name || !link) {
+        alert('Please fill in required fields.');
+        return;
+    }
+
+    // Duplicate check and push to Firebase
+    db.ref('groups').orderByChild('link').equalTo(link).once('value', snapshot => {
+        if (snapshot.exists()) {
+            alert('Already exist!');
+        } else {
+            db.ref('groups').push({
+                name: name,
+                category: category,
+                country: country,
+                tags: tags,
+                link: link,
+                status: 'pending',
+                timestamp: Date.now()
+            }).then(() => {
+                alert('Group Submitted for approval!');
                 closeModal('submitModal');
-                document.getElementById('subName').value = '';
-                document.getElementById('subLink').value = '';
+                document.getElementById('groupName').value = '';
+                document.getElementById('groupLink').value = '';
+                
+                // Refresh list so it shows in Admin Pending tab immediately
+                if (typeof fetchGroupsFromFirebase === 'function') {
+                    fetchGroupsFromFirebase();
+                }
             });
         }
+    });
+}
+
+
 
         function openReportModal(id) { 
             document.getElementById('reportGroupId').value = id; 
@@ -549,5 +581,36 @@
             fetchGroupsFromFirebase();
         };
     </script>
+     <!-- ABOUT & SEO SECTION -->
+  <section style="padding: 20px; max-width: 800px; margin: 20px auto; background: #ffffff; border-radius: 8px; font-family: sans-serif; color: #333; line-height: 1.6;">
+    
+    <h2 style="color: #075e54;">About Whats Group Join Links</h2>
+    <p>Welcome to <strong>Whats Group Join Links</strong>, your ultimate destination for finding active and updated WhatsApp group links. Whether you are looking for educational groups, tech discussions, entertainment, business networking, or sports updates, we provide direct join links for top active communities worldwide.</p>
+
+    <h3 style="color: #128c7e;">How to Join WhatsApp Groups?</h3>
+    <ol style="padding-left: 20px;">
+      <li>Browse through our category list and select your desired group category.</li>
+      <li>Click on the <strong>Join Group</strong> button next to the group name.</li>
+      <li>You will be redirected to WhatsApp; simply tap <strong>Join Chat</strong> to enter the group.</li>
+    </ol>
+
+    <h3 style="color: #128c7e;">WhatsApp Group Rules</h3>
+    <ul style="padding-left: 20px;">
+      <li>Respect all group members and admin decisions.</li>
+      <li>Do not post spam, fake news, or irrelevant promotional links.</li>
+      <li>Keep discussions focused on the group topic.</li>
+      <li>Personal messaging members without consent is strictly prohibited.</li>
+    </ul>
+
+    <h3 style="color: #d32f2f;">Disclaimer</h3>
+    <p style="font-size: 0.9em; color: #666;">We are not affiliated with WhatsApp Inc. All group links are submitted by users or collected from public domains. Group admins are solely responsible for their content. Join groups at your own discretion.</p>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="text-align: center; padding: 15px; background: #075e54; color: #ffffff; font-family: sans-serif; font-size: 0.9em; margin-top: 30px;">
+    <p>&copy; 2026 Whats Group Join Links. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>

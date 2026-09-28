@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://groupjoinlink.github.io/</loc>
-    <lastmod>2026-09-28</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
+
+    <!-- Main Homepage -->
+    <url>
+        <loc>https://groupjoinlink.github.io/</loc>
+        <lastmod>2026-09-28</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Group Detail Page -->
+    <url>
+        <loc>https://groupjoinlink.github.io/detail.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Legal Compliance Pages -->
+    <url>
+        <loc>https://groupjoinlink.github.io/privacy-policy.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/about-us.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/contact-us.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Articles -->
+    <url>
+        <loc>https://groupjoinlink.github.io/article1.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article2.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article3.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article4.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article5.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article6.html</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://groupjoinlink.github.io/article7.html</loc>
+        <priority>0.8</priority>
+    </url>
+
 </urlset>

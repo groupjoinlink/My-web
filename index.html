@@ -153,6 +153,98 @@
       .admin-link-box { margin-top: 5px; font-size: 12px; color: #075e54; word-break: break-all; }
       .admin-link-box a { color: #3182ce; text-decoration: underline; }
       .clicks-badge { background: #edf2f7; color: #2d3748; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 5px; border: 1px solid #cbd5e0; }
+     /* Laptop & Larger Screens Setup */
+@media (min-width: 768px) {
+    body {
+        padding: 40px;
+    }
+    
+    .container, main, .wrapper {
+        max-width: 1100px; /* Laptop screen ke hisab se width */
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Groups List / Cards Grid view for Laptop */
+    .group-grid, .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    /* Header & Navigation Adjustments */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+.daily-feed-container {
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.section-title {
+  font-size: 18px;
+  color: #075e54;
+  border-bottom: 2px solid #25d366;
+  padding-bottom: 5px;
+  margin-bottom: 12px;
+}
+
+.feed-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #e0e0e0;
+}
+
+.post-title {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.feed-img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.post-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+
+.like-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.like-btn {
+  background-color: #ff4757;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.like-btn.liked {
+  background-color: #2ed573;
+}
+
+
   </style>
 </head>
 <body>
@@ -167,6 +259,13 @@
             <button class="btn-banner btn-right" onclick="openModal('submitModal')">Submit Group</button>
         </div>
     </div>
+<!-- CATEGORY DESCRIPTIONS FOR SEO & ADSENSE -->
+<div class="container" style="background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+  <h2 style="color: #075e54; font-size: 18px; margin-bottom: 10px;">Explore Our Active WhatsApp Group Categories</h2>
+  <p style="font-size: 14px; color: #555; line-height: 1.6;">
+    Welcome to our verified directory. Browse through various active categories including <strong>Entertainment</strong> (funny memes, TV updates), <strong>Islamic</strong> (daily Hadees & Quranic reminders), <strong>Videos</strong> (viral clips & status), <strong>Sports</strong> (cricket & live match scores), <strong>Movies</strong> (reviews & updates), <strong>Gaming</strong> (PUBG & esports tips), <strong>Trading</strong> (crypto & stock signals), <strong>Tech & Mobile</strong> (apps & news), <strong>Online Earning</strong> (freelancing & jobs), and <strong>Jobs</strong> (instant hiring alerts).
+  </p>
+</div>
 
     <!-- MAIN CATEGORIES & GROUPS -->
     <div class="container" id="categoriesContainer">
@@ -185,33 +284,31 @@
     </div>
 
     <!-- SUBMIT GROUP MODAL -->
-    <div id="submitModal" class="modal">
-        <div class="modal-content">
-            <h3>Submit New Group</h3>
-            <div class="form-group">
-                <label>Group Name</label>
-                <input type="text" id="subName" placeholder="Enter Group Name">
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select id="subCategory"></select>
-            </div>
-            <div class="form-group">
-                <label>Select Country</label>
-                <select id="subCountry"></select>
-            </div>
-            <div class="form-group">
-                <label>Group Tags</label>
-                <input type="text" id="subTags" placeholder="e.g. Crypto, Earning">
-            </div>
-            <div class="form-group">
-                <label>WhatsApp Group Link</label>
-                <input type="url" id="subLink" placeholder="https://chat.whatsapp.com/...">
-            </div>
-            <button class="btn-banner btn-left" style="width:100%" onclick="submitGroup()">Submit Group</button>
-            <button class="btn-close" onclick="closeModal('submitModal')">Close</button>
+<div id="submitModal" class="modal">
+    <div class="modal-content">
+        <h3>Submit New Group</h3>
+        <div class="form-group">
+            <label>Group Name</label>
+            <input type="text" id="subName" placeholder="Enter Group Name">
         </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select id="subCategory"></select>
+        </div>
+        <div class="form-group">
+            <label>Select Country</label>
+            <select id="subCountry"></select>
+        </div>
+        <!-- Group Tags wala input field yahan se delete kar dein -->
+        <div class="form-group">
+            <label>WhatsApp Group Link</label>
+            <input type="url" id="subLink" placeholder="https://chat.whatsapp.com/...">
+        </div>
+        <button class="btn-banner btn-left" style="width:100%" onclick="submitGroup()">Submit Group</button>
+        <button class="btn-close" onclick="closeModal('submitModal')">Close</button>
     </div>
+</div>
+
 
     <!-- REPORT MODAL -->
     <div id="reportModal" class="modal">
@@ -289,11 +386,19 @@
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
         function populateDropdowns() {
-            const catSelect = document.getElementById('subCategory');
-            const countrySelect = document.getElementById('subCountry');
-            if (catSelect) catSelect.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
-            if (countrySelect) countrySelect.innerHTML = countries.map(cnt => `<option value="${cnt}">${cnt}</option>`).join('');
-        }
+    const catSelect = document.getElementById('subCategory');
+    const countrySelect = document.getElementById('subCountry');
+    
+    if (catSelect) {
+        catSelect.innerHTML = '<option value="" disabled selected>-- Select Category --</option>' + 
+            categories.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+    if (countrySelect) {
+        countrySelect.innerHTML = '<option value="" disabled selected>-- Select Country --</option>' + 
+            countries.map(cnt => `<option value="${cnt}">${cnt}</option>`).join('');
+    }
+}
+
 
         // Secret Admin Panel Opener (4 Quick Taps on Title)
         let tapCount = 0, tapTimer = null;
@@ -476,44 +581,53 @@
         }
 
         // SUBMIT GROUP FUNCTION
-        function submitGroup() {
-          const name = document.getElementById('subName').value.trim();
-          const category = document.getElementById('subCategory').value;
-          const country = document.getElementById('subCountry').value;
-          const tags = document.getElementById('subTags').value.trim();
-          const link = document.getElementById('subLink').value.trim();
+         function submitGroup() {
+  const name = document.getElementById('subName').value.trim();
+  const category = document.getElementById('subCategory').value;
+  const country = document.getElementById('subCountry').value;
+  const link = document.getElementById('subLink').value.trim();
 
-          if (!name || !link) {
-            alert('Please fill all required fields!');
-            return;
-          }
+  if (!name || !link) {
+    alert('Please fill in Group Name and WhatsApp Link!');
+    return;
+  }
 
-          const isDuplicate = allGroups.some(g => g.link && g.link.trim().toLowerCase() === link.toLowerCase());
+  if (!category) {
+    alert('Please select a Category!');
+    return;
+  }
 
-          if (isDuplicate) {
-            alert('⚠️ Yeh WhatsApp group link pehle se submit hua parha hai!');
-            return;
-          }
+  if (!country) {
+    alert('Please select a Country!');
+    return;
+  }
 
-          db.ref('groups').push({
-            name: name,
-            category: category,
-            country: country,
-            tags: tags,
-            link: link,
-            clicks: 0,
-            status: 'pending',
-            timestamp: Date.now()
-          }).then(() => {
-            alert('Group Submitted for Review!');
-            closeModal('submitModal');
-            document.getElementById('subName').value = '';
-            document.getElementById('subTags').value = '';
-            document.getElementById('subLink').value = '';
-          }).catch(err => {
-            alert('Submission Failed: ' + err.message);
-          });
-        }
+  const isDuplicate = allGroups.some(g => g.link && g.link.trim().toLowerCase() === link.toLowerCase());
+
+  if (isDuplicate) {
+    alert('⚠️ Yeh WhatsApp group link pehle se submit hua parha hai!');
+    return;
+  }
+
+  db.ref('groups').push({
+    name: name,
+    category: category,
+    country: country,
+    link: link,
+    clicks: 0,
+    status: 'pending',
+    timestamp: Date.now()
+  }).then(() => {
+    alert('Group Submitted for Review!');
+    closeModal('submitModal');
+    document.getElementById('subName').value = '';
+    document.getElementById('subLink').value = '';
+    populateDropdowns(); // Reset selects back to placeholder
+  }).catch(err => {
+    alert('Submission Failed: ' + err.message);
+  });
+}
+
 
         // REPORT MODAL OPEN
         function openReportModal(id) { 
@@ -615,7 +729,42 @@
             populateDropdowns();
             fetchGroupsFromFirebase();
         };
+      
     </script>
+  <!-- Daily Updates Section -->
+<div class="daily-feed-container">
+  <h2 class="section-title">Daily Updates & Posts</h2>
+
+  <!-- Post 1: Islamic / News / Funny -->
+  <div class="feed-card">
+    <h3 class="post-title">Daily Post1</h3>
+    <img src="post1.jpg" alt="Daily Post 1" class="feed-img">
+    <p class="post-text">
+      Aaj ki yeh mazedaar post doston ke sath zaroor share karein! Is tarah ki mazeed funny aur informative updates ke liye hamari website ko daily visit karte rahein aur niche diye gaye WhatsApp groups ko join karein.
+    </p>
+    <div class="like-container">
+      <button class="like-btn" onclick="toggleLike(this)">
+        ❤️ Like <span class="like-count">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Post 2 -->
+  <div class="feed-card">
+    <h3 class="post-title">Daily Post2</h3>
+    <img src="post2.jpg" alt="Daily Post 2" class="feed-img">
+    <p class="post-text">
+      Aaj ki deeni baat: Hamesha doosron ke sath achhi baat share karein. Is post ko aage apne WhatsApp groups mein share karke sawab-e-jariya hasil karein.
+    </p>
+    <div class="like-container">
+      <button class="like-btn" onclick="toggleLike(this)">
+        ❤️ Like <span class="like-count">0</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
   <!-- Blog Section for AdSense -->
 <div style="margin: 30px auto; max-width: 800px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
     <h2 style="color: #075e54;">Latest Guides & Articles</h2>
@@ -644,6 +793,20 @@
 </p>
     </div>
   </footer>
+<script>
+  function toggleLike(btn) {
+    let countSpan = btn.querySelector('.like-count');
+    let currentLikes = parseInt(countSpan.innerText);
+
+    if (!btn.classList.contains('liked')) {
+      countSpan.innerText = currentLikes + 1;
+      btn.classList.add('liked');
+    } else {
+      countSpan.innerText = currentLikes - 1;
+      btn.classList.remove('liked');
+    }
+  }
+</script>
 
 </body>
 </html>      
